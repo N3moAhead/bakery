@@ -1,4 +1,4 @@
-# BunBite
+# Bakery
 
 An API to help building Rest API applications with Bun Server in the Background
 
