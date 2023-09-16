@@ -1,13 +1,14 @@
 import Bakery from "@Bakery";
+import BakeryResponse from "@Bakery/BakeryResponse";
 
 const server = Bakery();
 
-server.get("/", () => {
-  return "Hello from the Server";
+server.get("/", (req: Request, res: BakeryResponse) => {
+  res.send("Hallo Welt");
 });
 
-server.get("/test", () => {
-  return "This is just a Test response nothing serious";
+server.get("/json", (req: Request, res: BakeryResponse) => {
+  res.json({ name: "Im Bruno" });
 });
 
 server.listen(8080);

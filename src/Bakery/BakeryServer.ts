@@ -1,5 +1,6 @@
 import type { Server } from "bun";
 import type { HandlerMap, ServerOptions } from "./types";
+import BakeryResponse from "@Bakery/BakeryResponse";
 
 export default class BakeryServer {
   server?: Server;
@@ -15,12 +16,21 @@ export default class BakeryServer {
       fetch(req) {
         const host = `http://${req.headers.get("host")}`;
         const path = req.url.replace(host || "", "");
+
+        let finalAnswer: Response | undefined;
         if (handlerMap?.[path]) {
-          let answer;
           handlerMap[path].forEach((handlerFunction) => {
-            answer = handlerFunction(req);
+            const newBakeryResponse = new BakeryResponse((res: Response) => {
+              finalAnswer = res;
+            });
+            handlerFunction(req, newBakeryResponse);
+            if (finalAnswer) {
+              return;
+            }
           });
-          return new Response(answer);
+        }
+        if (finalAnswer) {
+          return finalAnswer;
         }
         throw new Error("Path not Found");
       },
