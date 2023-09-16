@@ -7,10 +7,13 @@
     "build": "bun build ./src/index.ts --outdir ./build --minify",
     "start": "bun ./build/index.js",
     "test": "bun test",
+    "prepare": "husky install",
+    "check-format": "prettier ./src --check",
     "format": "prettier --write ./src"
   },
   "devDependencies": {
     "bun-types": "latest",
+    "husky": "^8.0.3",
     "prettier": "^3.0.3"
   },
   "peerDependencies": {

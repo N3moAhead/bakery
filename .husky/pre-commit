@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo 'Checking the formatting before committing'
+
+yarn check-format || (
+  echo '🤢🍞🤢🍞 There is bread on the ground like everywhere?! 🤢🍞🤢🍞
+          Prettier Check Failed. Run yarn format, add changes and try to commit again.';
+  false;
+)
+
+echo "Everything looks fine!"
