@@ -9,4 +9,8 @@ yarn check-format || (
   false;
 )
 
+yarn test || (
+  echo 'Ahh for god sake the test are failing!!!!!
+          Jest test failed. Fix the broken tests above and try to commit again afterwards';
+) 
 echo "Everything looks fine!"
